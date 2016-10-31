@@ -11,9 +11,15 @@ dealerCard = 0
 usableAce = False
 
 def card():
+    '''
+    return a random card 
+    '''
     return min(10, randint(1,14))
 
 def encode():
+    '''
+    return the state correspond to the current deck(playerSum, usableAce, dealerCard)
+    '''
     return 1 + (90 if usableAce else 0) + 9*(dealerCard-1) + (playerSum-12)
     
 def decode(state):
@@ -32,6 +38,9 @@ def numActions(s):
     return 2
 
 def sample(s, a):
+    '''
+    a: 0-->stick 1-->hit
+    '''
     global playerSum, dealerCard, usableAce
     decode(s)
     if s==0: return firstSample()
@@ -42,10 +51,10 @@ def sample(s, a):
         if usableAce:
             playerSum -= 10
             usableAce = False
-            return 0, encode()
+            return 0, encode() #continue
         else:
-            return -1, False
-    return 0, encode()
+            return -1, False #boom, terminal, player loses
+    return 0, encode() # return the reward of 0 and the corresponding state
 
 def firstSample():
     global playerSum, dealerCard, usableAce
@@ -56,13 +65,13 @@ def firstSample():
     usableAce = playerCard1==1 or playerCard2==1
     if usableAce: playerSum += 10
     dealerCard = card()
-    if playerSum==21:    # player has natural
+    if playerSum==21:    # player has natural 21
         dealerCard2 = card()
         dealerSum = dealerCard + dealerCard2
         if (dealerCard==1 or dealerCard2==1) and dealerSum==11:  # dealer has a natural too
-            return 0, False
+            return 0, False # tie
         else:
-            return 1, False
+            return 1, False # player wins
     while playerSum < 12: playerSum += card()
     if playerSum==21: return dealerPlaySample()
     return 0, encode()
