@@ -45,10 +45,9 @@ def learn(alpha, eps, numTrainingEpisodes):
         if not episodeNum%10000 and episodeNum!=0:
             #print("return sum is: ", returnSum)
             #print("episode number is: ", episodeNum)
-            print ("Average return after %d episodes: %f"%(episodeNum, returnSum/episodeNum))
-    #print ("Average return after all episodes: %f"%(numEpisodes, returnSum/episodeNum))
-
-
+            #print ("Average return after %d episodes: %f"%(episodeNum, returnSum/episodeNum))
+            pass
+            
 def evaluate(numEvaluationEpisodes):
     returnSum = 0.0
     for episodeNum in range(numEvaluationEpisodes):
@@ -62,10 +61,12 @@ def evaluate(numEvaluationEpisodes):
             if state==False:
                 break
         returnSum = returnSum + G
-    print ("determinstic return after learning: ",returnSum/numEvaluationEpisodes)
+    print ("Determinstic return after learning: ",returnSum/numEvaluationEpisodes)
 
     return returnSum/numEvaluationEpisodes
 
+def greedyAction(state):
+    return argmax(Q1[state]+Q2[state])
 
 if __name__ == "__main__":
     #epsilon = 1
@@ -74,4 +75,4 @@ if __name__ == "__main__":
     epsilon = 0.01
     learn(alpha, epsilon, 1000000)
     evaluate(1000000)
-    #blackjack.printPolicy(greedyAction)
+    blackjack.printPolicy(greedyAction)
