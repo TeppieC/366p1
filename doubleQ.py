@@ -12,8 +12,12 @@ def learn(alpha, eps, numTrainingEpisodes):
         G = 0
         state = blackjack.init()
         while(True):
-            # choose action
-            action = epsilonGreedyAction(state, eps)
+            # choose action, from a epsilon greedy
+            num=np.random.random()
+            if (num>=eps):
+                action = argmax(Q1[state]+Q2[state])
+            else:
+                action = np.random.randint(0,2)
 
             # perform action
             if state ==0:
@@ -21,6 +25,7 @@ def learn(alpha, eps, numTrainingEpisodes):
             else:
                 reward,nextState = blackjack.sample(state,action)
             
+            # to deal with the terminal state
             if nextState == False:
                 nextState = 0
 
@@ -51,7 +56,7 @@ def evaluate(numEvaluationEpisodes):
         state=blackjack.init()
         while(True):
             # choose the action greedy wrt the sum of two action values
-            reward,state=blackjack.sample(state, greedyAction(state))
+            reward,state=blackjack.sample(state, argmax(Q1[state]+Q2[state]))
             G=G+reward
 
             if state==False:
@@ -61,18 +66,6 @@ def evaluate(numEvaluationEpisodes):
 
     return returnSum/numEvaluationEpisodes
 
-def epsilonGreedyAction(state, epsilon):
-    num=np.random.random()
-    if (num>=epsilon):
-        return argmax(Q1[state]+Q2[state])
-    else:
-        return (np.random.randint(0,2))
-
-def greedyAction(state):
-    '''
-    choose the action greedy wrt the sum of two action values
-    '''
-    return argmax(Q1[state]+Q2[state])
 
 if __name__ == "__main__":
     #epsilon = 1
@@ -81,4 +74,4 @@ if __name__ == "__main__":
     epsilon = 0.01
     learn(alpha, epsilon, 1000000)
     evaluate(1000000)
-    blackjack.printPolicy(greedyAction)
+    #blackjack.printPolicy(greedyAction)

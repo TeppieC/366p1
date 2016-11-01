@@ -18,5 +18,5 @@ def run(numEpisodes):
         returnSum = returnSum + G
     return returnSum/numEpisodes
 
-numEpisodes = 2000
-print("Average return: ", run(numEpisodes))
+#numEpisodes = 2000
+#print("Average return: ", run(numEpisodes))
