@@ -41,12 +41,9 @@ def learn(alpha, eps, numTrainingEpisodes):
             if state==False:
                 break
         returnSum = returnSum + G
+        if episodeNum % 10000 == 0 and episodeNum != 0:
+            print("Average return so far: ", returnSum / episodeNum)
 
-        if not episodeNum%10000 and episodeNum!=0:
-            #print("return sum is: ", returnSum)
-            #print("episode number is: ", episodeNum)
-            #print ("Average return after %d episodes: %f"%(episodeNum, returnSum/episodeNum))
-            pass
             
 def evaluate(numEvaluationEpisodes):
     returnSum = 0.0

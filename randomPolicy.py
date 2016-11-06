@@ -2,10 +2,10 @@ import blackjack
 from pylab import *
 import numpy as np
 
-def run(numEpisodes):
+def run(numEvaluationEpisodes):
 
     returnSum = 0.0
-    for episodeNum in range(numEpisodes): #loop for 2000 iterations
+    for episodeNum in range(numEvaluationEpisodes): #loop for 2000 iterations
         G = 0
         state=blackjack.init()
         while(True): # if not reach the terminal state
@@ -16,7 +16,7 @@ def run(numEpisodes):
 
         print("Episode: ", episodeNum, "Return: ", G)
         returnSum = returnSum + G
-    return returnSum/numEpisodes
+    return returnSum/numEvaluationEpisodes
 
-#numEpisodes = 2000
-#print("Average return: ", run(numEpisodes))
+#numEvaluationEpisodes = 2000
+#print("Average return: ", run(numEvaluationEpisodes))
