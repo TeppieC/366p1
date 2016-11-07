@@ -1,4 +1,0 @@
-alpha=
-eps=
-numTrainingEpisodes=
-avgReturn=

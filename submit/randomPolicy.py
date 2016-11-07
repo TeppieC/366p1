@@ -14,7 +14,7 @@ def run(numEvaluationEpisodes):
             if state==False:
                 break
 
-        print("Episode: ", episodeNum, "Return: ", G)
+        #print("Episode: ", episodeNum, "Return: ", G)
         returnSum = returnSum + G
     return returnSum/numEvaluationEpisodes
 

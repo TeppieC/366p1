@@ -42,7 +42,8 @@ def learn(alpha, eps, numTrainingEpisodes):
                 break
         returnSum = returnSum + G
         if episodeNum % 10000 == 0 and episodeNum != 0:
-            print("Average return so far: ", returnSum / episodeNum)
+            #print("Average return so far: ", returnSum / episodeNum)
+            pass
 
             
 def evaluate(numEvaluationEpisodes):
@@ -58,7 +59,7 @@ def evaluate(numEvaluationEpisodes):
             if state==False:
                 break
         returnSum = returnSum + G
-    print ("Determinstic return after learning: ",returnSum/numEvaluationEpisodes)
+    #print ("Determinstic return after learning: ",returnSum/numEvaluationEpisodes)
 
     return returnSum/numEvaluationEpisodes
 
@@ -72,4 +73,8 @@ if __name__ == "__main__":
     epsilon = 0.01
     learn(alpha, epsilon, 1000000)
     evaluate(1000000)
-    blackjack.printPolicy(greedyAction)
+    #alpha = 0.0003
+    #epsilon = 0.0125
+    #learn(alpha, epsilon, 10000000)
+    #evaluate(10000000)
+    #blackjack.printPolicyToFile(greedyAction)
